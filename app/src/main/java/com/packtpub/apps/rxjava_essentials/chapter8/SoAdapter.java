@@ -136,7 +136,7 @@ public class SoAdapter extends RecyclerView.Adapter<SoAdapter.ViewHolder> {
 //        } else {
 //          mProfileListener.open(user.getLink());
 //        }
-//      });
+//      });\
     }
 
     private void displayWeatherInfos(User user) {

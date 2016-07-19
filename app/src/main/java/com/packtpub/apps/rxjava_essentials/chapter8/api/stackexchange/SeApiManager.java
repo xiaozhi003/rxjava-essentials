@@ -7,16 +7,21 @@ import java.util.List;
 
 import lombok.experimental.Accessors;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-@Accessors(prefix = "m") public class SeApiManager {
+@Accessors(prefix = "m")
+public class SeApiManager {
 
   private final StackExchangeService mStackExchangeService;
 
   public SeApiManager() {
-      Retrofit sRetrofit = new Retrofit.Builder().baseUrl("https://api.stackexchange.com")
+    Retrofit sRetrofit = new Retrofit.Builder().baseUrl("https://api.stackexchange.com")
+        .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
         .build();
 
     mStackExchangeService = sRetrofit.create(StackExchangeService.class);

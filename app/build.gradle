@@ -51,8 +51,12 @@ dependencies {
     compile 'com.alterego:advancedandroidlogger:1.0.3@aar'
     provided 'org.projectlombok:lombok:1.16.6'
     compile 'com.jakewharton:butterknife:7.0.1'
+
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava-joins:0.22.0'
+    compile 'com.trello:rxlifecycle:0.6.1'
+
+
     compile 'com.google.guava:guava:18.0'
     compile 'com.github.lzyzsd:circleprogress:1.1.0@aar'
     compile 'com.github.rey5137:material:1.0.0'

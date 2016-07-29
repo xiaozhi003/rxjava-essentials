@@ -1,6 +1,7 @@
 package com.packtpub.apps.rxjava_essentials.chapter8.api.stackexchange;
 
 import com.packtpub.apps.rxjava_essentials.chapter8.api.stackexchange.models.UsersResponse;
+
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;

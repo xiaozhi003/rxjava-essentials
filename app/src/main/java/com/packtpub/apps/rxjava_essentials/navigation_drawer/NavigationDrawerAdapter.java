@@ -7,7 +7,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.packtpub.apps.rxjava_essentials.R;
+
 import java.util.List;
 
 public class NavigationDrawerAdapter
@@ -47,26 +49,26 @@ public class NavigationDrawerAdapter
         null, null);
 
     viewHolder.itemView.setOnTouchListener((v, event) -> {
-          switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-              touchPosition(i);
-              return false;
-            case MotionEvent.ACTION_CANCEL:
-              touchPosition(-1);
-              return false;
-            case MotionEvent.ACTION_MOVE:
-              return false;
-            case MotionEvent.ACTION_UP:
-              touchPosition(-1);
-              return false;
-          }
-          return true;
-        });
+      switch (event.getAction()) {
+        case MotionEvent.ACTION_DOWN:
+          touchPosition(i);
+          return false;
+        case MotionEvent.ACTION_CANCEL:
+          touchPosition(-1);
+          return false;
+        case MotionEvent.ACTION_MOVE:
+          return false;
+        case MotionEvent.ACTION_UP:
+          touchPosition(-1);
+          return false;
+      }
+      return true;
+    });
     viewHolder.itemView.setOnClickListener(v -> {
-          if (mNavigationDrawerCallbacks != null) {
-            mNavigationDrawerCallbacks.onNavigationDrawerItemSelected(i);
-          }
-        });
+      if (mNavigationDrawerCallbacks != null) {
+        mNavigationDrawerCallbacks.onNavigationDrawerItemSelected(i);
+      }
+    });
 
     //TODO: selected menu position, change layout accordingly
     if (mSelectedPosition == i || mTouchedPosition == i) {
@@ -95,7 +97,8 @@ public class NavigationDrawerAdapter
     notifyItemChanged(position);
   }
 
-  @Override public int getItemCount() {
+  @Override
+  public int getItemCount() {
     return mData != null ? mData.size() : 0;
   }
 

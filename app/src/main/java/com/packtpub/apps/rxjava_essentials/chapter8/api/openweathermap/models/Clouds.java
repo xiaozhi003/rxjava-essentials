@@ -4,7 +4,8 @@ import com.google.gson.annotations.Expose;
 
 public class Clouds {
 
-  @Expose private Integer all;
+  @Expose
+  private Integer all;
 
   /**
    * @return The all

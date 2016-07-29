@@ -31,9 +31,11 @@ import rx.observables.JoinObservable;
 
 public class AndThenWhenExampleFragment extends Fragment {
 
-  @Bind(R.id.fragment_first_example_list) RecyclerView mRecyclerView;
+  @Bind(R.id.fragment_first_example_list)
+  RecyclerView mRecyclerView;
 
-  @Bind(R.id.fragment_first_example_swipe_container) SwipeRefreshLayout mSwipeRefreshLayout;
+  @Bind(R.id.fragment_first_example_swipe_container)
+  SwipeRefreshLayout mSwipeRefreshLayout;
 
   private ApplicationAdapter mAdapter;
 
@@ -42,12 +44,14 @@ public class AndThenWhenExampleFragment extends Fragment {
   public AndThenWhenExampleFragment() {
   }
 
-  @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState) {
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                           Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_example, container, false);
   }
 
-  @Override public void onViewCreated(View view, Bundle savedInstanceState) {
+  @Override
+  public void onViewCreated(View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     ButterKnife.bind(this, view);
 
@@ -84,16 +88,19 @@ public class AndThenWhenExampleFragment extends Fragment {
         .toObservable()
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new Observer<AppInfo>() {
-          @Override public void onCompleted() {
+          @Override
+          public void onCompleted() {
             Toast.makeText(getActivity(), "Here is the list!", Toast.LENGTH_LONG).show();
           }
 
-          @Override public void onError(Throwable e) {
+          @Override
+          public void onError(Throwable e) {
             mSwipeRefreshLayout.setRefreshing(false);
             Toast.makeText(getActivity(), "Something went wrong!", Toast.LENGTH_SHORT).show();
           }
 
-          @Override public void onNext(AppInfo appInfo) {
+          @Override
+          public void onNext(AppInfo appInfo) {
             if (mSwipeRefreshLayout.isRefreshing()) {
               mSwipeRefreshLayout.setRefreshing(false);
             }

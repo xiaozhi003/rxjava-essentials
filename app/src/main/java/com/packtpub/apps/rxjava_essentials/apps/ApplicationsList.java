@@ -7,22 +7,22 @@ import lombok.experimental.Accessors;
 @Accessors(prefix = "m")
 public class ApplicationsList {
 
-    private static ApplicationsList ourInstance = new ApplicationsList();
+  private static ApplicationsList ourInstance = new ApplicationsList();
 
-    private List<AppInfo> mList;
+  private List<AppInfo> mList;
 
-    private ApplicationsList() {
-    }
+  private ApplicationsList() {
+  }
 
-    public List<AppInfo> getList() {
-        return mList;
-    }
+  public static ApplicationsList getInstance() {
+    return ourInstance;
+  }
 
-    public void setList(List<AppInfo> list) {
-        mList = list;
-    }
+  public List<AppInfo> getList() {
+    return mList;
+  }
 
-    public static ApplicationsList getInstance() {
-        return ourInstance;
-    }
+  public void setList(List<AppInfo> list) {
+    mList = list;
+  }
 }

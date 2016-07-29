@@ -32,9 +32,11 @@ import rx.schedulers.Schedulers;
 
 public class SharedPreferencesListFragment extends Fragment {
 
-  @Bind(R.id.fragment_first_example_list) RecyclerView mRecyclerView;
+  @Bind(R.id.fragment_first_example_list)
+  RecyclerView mRecyclerView;
 
-  @Bind(R.id.fragment_first_example_swipe_container) SwipeRefreshLayout mSwipeRefreshLayout;
+  @Bind(R.id.fragment_first_example_swipe_container)
+  SwipeRefreshLayout mSwipeRefreshLayout;
 
   private ApplicationAdapter mAdapter;
 
@@ -43,12 +45,14 @@ public class SharedPreferencesListFragment extends Fragment {
   public SharedPreferencesListFragment() {
   }
 
-  @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState) {
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                           Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_example, container, false);
   }
 
-  @Override public void onViewCreated(View view, Bundle savedInstanceState) {
+  @Override
+  public void onViewCreated(View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     ButterKnife.bind(this, view);
 
@@ -76,17 +80,20 @@ public class SharedPreferencesListFragment extends Fragment {
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new Observer<AppInfo>() {
-          @Override public void onCompleted() {
+          @Override
+          public void onCompleted() {
             mSwipeRefreshLayout.setRefreshing(false);
             Toast.makeText(getActivity(), "Here is the list!", Toast.LENGTH_LONG).show();
           }
 
-          @Override public void onError(Throwable e) {
+          @Override
+          public void onError(Throwable e) {
             Toast.makeText(getActivity(), "Something went wrong!", Toast.LENGTH_SHORT).show();
             mSwipeRefreshLayout.setRefreshing(false);
           }
 
-          @Override public void onNext(AppInfo appInfo) {
+          @Override
+          public void onNext(AppInfo appInfo) {
             mAddedApps.add(appInfo);
             mAdapter.addApplication(mAddedApps.size() - 1, appInfo);
           }

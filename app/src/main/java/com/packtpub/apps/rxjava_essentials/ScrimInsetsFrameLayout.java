@@ -52,7 +52,8 @@ public class ScrimInsetsFrameLayout extends FrameLayout {
     setWillNotDraw(true);
   }
 
-  @Override protected boolean fitSystemWindows(Rect insets) {
+  @Override
+  protected boolean fitSystemWindows(Rect insets) {
     mInsets = new Rect(insets);
     setWillNotDraw(mInsetForeground == null);
     ViewCompat.postInvalidateOnAnimation(this);
@@ -62,7 +63,8 @@ public class ScrimInsetsFrameLayout extends FrameLayout {
     return true; // consume insets
   }
 
-  @Override public void draw(Canvas canvas) {
+  @Override
+  public void draw(Canvas canvas) {
     super.draw(canvas);
 
     int width = getWidth();
@@ -95,14 +97,16 @@ public class ScrimInsetsFrameLayout extends FrameLayout {
     }
   }
 
-  @Override protected void onAttachedToWindow() {
+  @Override
+  protected void onAttachedToWindow() {
     super.onAttachedToWindow();
     if (mInsetForeground != null) {
       mInsetForeground.setCallback(this);
     }
   }
 
-  @Override protected void onDetachedFromWindow() {
+  @Override
+  protected void onDetachedFromWindow() {
     super.onDetachedFromWindow();
     if (mInsetForeground != null) {
       mInsetForeground.setCallback(null);

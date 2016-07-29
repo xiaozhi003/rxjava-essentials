@@ -1,22 +1,34 @@
 package com.packtpub.apps.rxjava_essentials.chapter8.api.openweathermap.models;
 
 import com.google.gson.annotations.Expose;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class WeatherResponse {
 
-  @Expose private Coord coord;
-  @Expose private Sys sys;
-  @Expose private List<Weather> weather = new ArrayList<Weather>();
-  @Expose private String base;
-  @Expose private Main main;
-  @Expose private Wind wind;
-  @Expose private Clouds clouds;
-  @Expose private Integer dt;
-  @Expose private Integer id;
-  @Expose private String name;
-  @Expose private Integer cod;
+  @Expose
+  private Coord coord;
+  @Expose
+  private Sys sys;
+  @Expose
+  private List<Weather> weather = new ArrayList<Weather>();
+  @Expose
+  private String base;
+  @Expose
+  private Main main;
+  @Expose
+  private Wind wind;
+  @Expose
+  private Clouds clouds;
+  @Expose
+  private Integer dt;
+  @Expose
+  private Integer id;
+  @Expose
+  private String name;
+  @Expose
+  private Integer cod;
 
   /**
    * @return The coord

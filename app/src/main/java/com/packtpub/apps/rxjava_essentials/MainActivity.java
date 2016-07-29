@@ -35,13 +35,16 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks {
 
-  @Bind(R.id.toolbar_actionbar) Toolbar mToolbar;
+  @Bind(R.id.toolbar_actionbar)
+  Toolbar mToolbar;
 
-  @Bind(R.id.drawer) DrawerLayout mDrawerLayout;
+  @Bind(R.id.drawer)
+  DrawerLayout mDrawerLayout;
 
   private NavigationDrawerFragment mNavigationDrawerFragment;
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     ButterKnife.bind(this);
@@ -60,12 +63,14 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     }
   }
 
-  @Override public boolean onCreateOptionsMenu(Menu menu) {
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
     getMenuInflater().inflate(com.packtpub.apps.rxjava_essentials.R.menu.main, menu);
     return super.onCreateOptionsMenu(menu);
   }
 
-  @Override public void onNavigationDrawerItemSelected(int position) {
+  @Override
+  public void onNavigationDrawerItemSelected(int position) {
     FragmentManager fragmentManager = getFragmentManager();
     switch (position) {
       case 0:
@@ -157,7 +162,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     }
   }
 
-  @Override public void onBackPressed() {
+  @Override
+  public void onBackPressed() {
     if (mNavigationDrawerFragment.isDrawerOpen()) {
       mNavigationDrawerFragment.closeDrawer();
     } else {

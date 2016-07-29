@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,9 +27,13 @@ import rx.Observer;
 
 public class ScanExampleFragment extends Fragment {
 
-  @Bind(R.id.fragment_first_example_list) RecyclerView mRecyclerView;
+  private static final String TAG = ScanExampleFragment.class.getSimpleName();
 
-  @Bind(R.id.fragment_first_example_swipe_container) SwipeRefreshLayout mSwipeRefreshLayout;
+  @Bind(R.id.fragment_first_example_list)
+  RecyclerView mRecyclerView;
+
+  @Bind(R.id.fragment_first_example_swipe_container)
+  SwipeRefreshLayout mSwipeRefreshLayout;
 
   private ApplicationAdapter mAdapter;
 
@@ -37,12 +42,14 @@ public class ScanExampleFragment extends Fragment {
   public ScanExampleFragment() {
   }
 
-  @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState) {
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                           Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_example, container, false);
   }
 
-  @Override public void onViewCreated(View view, Bundle savedInstanceState) {
+  @Override
+  public void onViewCreated(View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     ButterKnife.bind(this, view);
 
@@ -63,6 +70,8 @@ public class ScanExampleFragment extends Fragment {
 
     List<AppInfo> apps = ApplicationsList.getInstance().getList();
 
+    Log.i(TAG,"apps length:" + apps.size());
+
     loadList(apps);
   }
 
@@ -76,16 +85,19 @@ public class ScanExampleFragment extends Fragment {
         return appInfo2;
       }
     }).distinct().subscribe(new Observer<AppInfo>() {
-      @Override public void onCompleted() {
+      @Override
+      public void onCompleted() {
         mSwipeRefreshLayout.setRefreshing(false);
       }
 
-      @Override public void onError(Throwable e) {
+      @Override
+      public void onError(Throwable e) {
         Toast.makeText(getActivity(), "Something went south!", Toast.LENGTH_SHORT).show();
         mSwipeRefreshLayout.setRefreshing(false);
       }
 
-      @Override public void onNext(AppInfo appInfo) {
+      @Override
+      public void onNext(AppInfo appInfo) {
         mAddedApps.add(appInfo);
         mAdapter.addApplication(mAddedApps.size() - 1, appInfo);
       }

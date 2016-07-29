@@ -99,7 +99,7 @@ public class FirstExampleFragment extends RxFragment {
         .subscribe(new Observer<List<AppInfo>>() {
           @Override
           public void onCompleted() {
-            Toast.makeText(getActivity(), "Here is the list!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Here is the list!", Toast.LENGTH_SHORT).show();
           }
 
           @Override

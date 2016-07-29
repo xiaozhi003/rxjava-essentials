@@ -4,10 +4,14 @@ import com.google.gson.annotations.Expose;
 
 public class Weather {
 
-  @Expose private Integer id;
-  @Expose private String main;
-  @Expose private String description;
-  @Expose private String icon;
+  @Expose
+  private Integer id;
+  @Expose
+  private String main;
+  @Expose
+  private String description;
+  @Expose
+  private String icon;
 
   /**
    * @return The id

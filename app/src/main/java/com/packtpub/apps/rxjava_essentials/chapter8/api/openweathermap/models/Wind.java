@@ -4,9 +4,11 @@ import com.google.gson.annotations.Expose;
 
 public class Wind {
 
-  @Expose private Double speed;
+  @Expose
+  private Double speed;
 
-  @Expose private Double deg;
+  @Expose
+  private Double deg;
 
   /**
    * @return The speed

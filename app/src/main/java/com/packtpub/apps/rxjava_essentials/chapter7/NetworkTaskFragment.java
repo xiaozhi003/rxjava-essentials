@@ -33,38 +33,46 @@ import rx.subjects.PublishSubject;
 
 public class NetworkTaskFragment extends Fragment {
 
-  @Bind(R.id.arc_progress) ArcProgress mArcProgress;
+  @Bind(R.id.arc_progress)
+  ArcProgress mArcProgress;
 
-  @Bind(R.id.button_download) Button mButton;
+  @Bind(R.id.button_download)
+  Button mButton;
 
   private PublishSubject<Integer> mDownloadProgress = PublishSubject.create();
 
-  @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState) {
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                           Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_download, container, false);
   }
 
-  @Override public void onViewCreated(View view, Bundle savedInstanceState) {
+  @Override
+  public void onViewCreated(View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     ButterKnife.bind(this, view);
   }
 
-  @OnClick(R.id.button_download) void download() {
+  @OnClick(R.id.button_download)
+  void download() {
     mButton.setText(getString(R.string.downloading));
     mButton.setClickable(false);
 
     mDownloadProgress.distinct()
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new Observer<Integer>() {
-          @Override public void onCompleted() {
+          @Override
+          public void onCompleted() {
             App.L.debug("Completed");
           }
 
-          @Override public void onError(Throwable e) {
+          @Override
+          public void onError(Throwable e) {
             App.L.error(e.toString());
           }
 
-          @Override public void onNext(Integer progress) {
+          @Override
+          public void onNext(Integer progress) {
             mArcProgress.setProgress(progress);
           }
         });
@@ -164,7 +172,8 @@ public class NetworkTaskFragment extends Fragment {
     return result;
   }
 
-  @Override public void onDestroyView() {
+  @Override
+  public void onDestroyView() {
     super.onDestroyView();
     ButterKnife.unbind(this);
   }

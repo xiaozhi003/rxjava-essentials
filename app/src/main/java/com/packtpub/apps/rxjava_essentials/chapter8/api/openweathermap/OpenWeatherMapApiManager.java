@@ -12,11 +12,6 @@ import rx.schedulers.Schedulers;
 public class OpenWeatherMapApiManager {
 
   private static OpenWeatherMapApiManager instance = new OpenWeatherMapApiManager();
-
-  public static OpenWeatherMapApiManager getInstance() {
-    return instance;
-  }
-
   private final OpenWeatherMapService mOpenWeatherMapService;
 
   private OpenWeatherMapApiManager() {
@@ -26,6 +21,10 @@ public class OpenWeatherMapApiManager {
         .build();
 
     mOpenWeatherMapService = restAdapter.create(OpenWeatherMapService.class);
+  }
+
+  public static OpenWeatherMapApiManager getInstance() {
+    return instance;
   }
 
   public Observable<WeatherResponse> getForecastByCity(String city) {

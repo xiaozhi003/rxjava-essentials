@@ -34,7 +34,8 @@ public class AppInfo implements Comparable<Object> {
     mIcon = icon;
   }
 
-  @Override public int compareTo(Object another) {
+  @Override
+  public int compareTo(Object another) {
     AppInfo f = (AppInfo) another;
     return getName().compareTo(f.getName());
   }

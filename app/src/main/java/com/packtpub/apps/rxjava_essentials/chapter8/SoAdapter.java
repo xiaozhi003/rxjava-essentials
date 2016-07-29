@@ -43,19 +43,22 @@ public class SoAdapter extends RecyclerView.Adapter<SoAdapter.ViewHolder> {
     notifyDataSetChanged();
   }
 
-  @Override public SoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  @Override
+  public SoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.so_list_item, parent, false);
     return new ViewHolder(v);
   }
 
-  @Override public void onBindViewHolder(SoAdapter.ViewHolder holder, int position) {
+  @Override
+  public void onBindViewHolder(SoAdapter.ViewHolder holder, int position) {
     if (position < mUsers.size()) {
       User user = mUsers.get(position);
       holder.setUser(user);
     }
   }
 
-  @Override public int getItemCount() {
+  @Override
+  public int getItemCount() {
     return mUsers == null ? 0 : mUsers.size();
   }
 
@@ -67,15 +70,20 @@ public class SoAdapter extends RecyclerView.Adapter<SoAdapter.ViewHolder> {
 
     private final View mView;
 
-    @Bind(R.id.name) TextView name;
+    @Bind(R.id.name)
+    TextView name;
 
-    @Bind(R.id.city) TextView city;
+    @Bind(R.id.city)
+    TextView city;
 
-    @Bind(R.id.reputation) TextView reputation;
+    @Bind(R.id.reputation)
+    TextView reputation;
 
-    @Bind(R.id.user_image) ImageView user_image;
+    @Bind(R.id.user_image)
+    ImageView user_image;
 
-    @Bind(R.id.city_image) ImageView city_image;
+    @Bind(R.id.city_image)
+    ImageView city_image;
 
     public ViewHolder(View view) {
       super(view);
@@ -86,20 +94,24 @@ public class SoAdapter extends RecyclerView.Adapter<SoAdapter.ViewHolder> {
     private Observable<Bitmap> loadBitmap(String url) {
       return Observable.create(subscriber -> {
         ImageLoader.getInstance().displayImage(url, city_image, new ImageLoadingListener() {
-          @Override public void onLoadingStarted(String imageUri, View view) {
+          @Override
+          public void onLoadingStarted(String imageUri, View view) {
 
           }
 
-          @Override public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+          @Override
+          public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
             subscriber.onError(failReason.getCause());
           }
 
-          @Override public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+          @Override
+          public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
             subscriber.onNext(loadedImage);
             subscriber.onCompleted();
           }
 
-          @Override public void onLoadingCancelled(String imageUri, View view) {
+          @Override
+          public void onLoadingCancelled(String imageUri, View view) {
             subscriber.onError(new Throwable("Image loading cancelled"));
           }
         });
@@ -156,15 +168,18 @@ public class SoAdapter extends RecyclerView.Adapter<SoAdapter.ViewHolder> {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(new Observer<Bitmap>() {
-              @Override public void onCompleted() {
+              @Override
+              public void onCompleted() {
 
               }
 
-              @Override public void onError(Throwable e) {
+              @Override
+              public void onError(Throwable e) {
                 App.L.error(e.toString());
               }
 
-              @Override public void onNext(Bitmap icon) {
+              @Override
+              public void onNext(Bitmap icon) {
                 city_image.setImageBitmap(icon);
               }
             });

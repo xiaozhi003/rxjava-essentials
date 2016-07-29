@@ -23,15 +23,18 @@ import butterknife.ButterKnife;
 public class SoActivity extends ActionBarActivity
     implements SoAdapter.ViewHolder.OpenProfileListener {
 
-  @Bind(R.id.so_recyclerview) RecyclerView mRecyclerView;
+  @Bind(R.id.so_recyclerview)
+  RecyclerView mRecyclerView;
 
-  @Bind(R.id.so_swipe) SwipeRefreshLayout mSwipe;
+  @Bind(R.id.so_swipe)
+  SwipeRefreshLayout mSwipe;
 
   private SoAdapter mAdapter;
 
   private SeApiManager mSeApiManager;
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_so);
     ButterKnife.bind(this);
@@ -66,13 +69,15 @@ public class SoActivity extends ActionBarActivity
     mRecyclerView.setVisibility(visibility);
   }
 
-  @Override public boolean onCreateOptionsMenu(Menu menu) {
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.menu_so, menu);
     return true;
   }
 
-  @Override public boolean onOptionsItemSelected(MenuItem item) {
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
     // Handle action bar item clicks here. The action bar will
     // automatically handle clicks on the Home/Up button, so long
     // as you specify a parent activity in AndroidManifest.xml.
@@ -86,7 +91,8 @@ public class SoActivity extends ActionBarActivity
     return super.onOptionsItemSelected(item);
   }
 
-  @Override public void open(String url) {
+  @Override
+  public void open(String url) {
     Intent i = new Intent(Intent.ACTION_VIEW);
     i.setData(Uri.parse(url));
     startActivity(i);

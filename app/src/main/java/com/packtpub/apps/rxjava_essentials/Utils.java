@@ -5,8 +5,10 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
+
 import rx.schedulers.Schedulers;
 
 public class Utils {

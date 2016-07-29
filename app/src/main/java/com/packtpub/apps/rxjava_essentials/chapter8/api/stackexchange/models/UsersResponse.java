@@ -7,7 +7,9 @@ import java.util.List;
 
 public class UsersResponse {
 
-  @SerializedName("items") @Expose private List<User> users;
+  @SerializedName("items")
+  @Expose
+  private List<User> users;
 
   public List<User> getUsers() {
     return users;

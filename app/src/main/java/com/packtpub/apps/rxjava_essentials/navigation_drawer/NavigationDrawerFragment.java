@@ -15,7 +15,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.packtpub.apps.rxjava_essentials.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,8 +57,10 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     return sharedPref.getString(settingName, defaultValue);
   }
 
-  @Nullable @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState) {
+  @Nullable
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                           Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
     mDrawerList = (RecyclerView) view.findViewById(R.id.drawerList);
     LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -72,7 +76,8 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     return view;
   }
 
-  @Override public void onCreate(Bundle savedInstanceState) {
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     mUserLearnedDrawer =
         Boolean.valueOf(readSharedSetting(getActivity(), PREF_USER_LEARNED_DRAWER, "false"));
@@ -82,7 +87,8 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     }
   }
 
-  @Override public void onAttach(Activity activity) {
+  @Override
+  public void onAttach(Activity activity) {
     super.onAttach(activity);
     try {
       mCallbacks = (NavigationDrawerCallbacks) activity;
@@ -107,7 +113,8 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     mActionBarDrawerToggle =
         new ActionBarDrawerToggle(getActivity(), mDrawerLayout, toolbar, R.string.drawer_open,
             R.string.drawer_close) {
-          @Override public void onDrawerClosed(View drawerView) {
+          @Override
+          public void onDrawerClosed(View drawerView) {
             super.onDrawerClosed(drawerView);
             if (!isAdded()) {
               return;
@@ -115,7 +122,8 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
             getActivity().invalidateOptionsMenu();
           }
 
-          @Override public void onDrawerOpened(View drawerView) {
+          @Override
+          public void onDrawerOpened(View drawerView) {
             super.onDrawerOpened(drawerView);
             if (!isAdded()) {
               return;
@@ -134,7 +142,8 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     }
 
     mDrawerLayout.post(new Runnable() {
-      @Override public void run() {
+      @Override
+      public void run() {
         mActionBarDrawerToggle.syncState();
       }
     });
@@ -150,7 +159,8 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     mDrawerLayout.closeDrawer(mFragmentContainerView);
   }
 
-  @Override public void onDetach() {
+  @Override
+  public void onDetach() {
     super.onDetach();
     mCallbacks = null;
   }
@@ -215,17 +225,20 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mFragmentContainerView);
   }
 
-  @Override public void onConfigurationChanged(Configuration newConfig) {
+  @Override
+  public void onConfigurationChanged(Configuration newConfig) {
     super.onConfigurationChanged(newConfig);
     mActionBarDrawerToggle.onConfigurationChanged(newConfig);
   }
 
-  @Override public void onSaveInstanceState(Bundle outState) {
+  @Override
+  public void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
     outState.putInt(STATE_SELECTED_POSITION, mCurrentSelectedPosition);
   }
 
-  @Override public void onNavigationDrawerItemSelected(int position) {
+  @Override
+  public void onNavigationDrawerItemSelected(int position) {
     selectItem(position);
   }
 

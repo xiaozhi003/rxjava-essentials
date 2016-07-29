@@ -4,13 +4,17 @@ import com.google.gson.annotations.Expose;
 
 public class Sys {
 
-  @Expose private Double message;
+  @Expose
+  private Double message;
 
-  @Expose private String country;
+  @Expose
+  private String country;
 
-  @Expose private Integer sunrise;
+  @Expose
+  private Integer sunrise;
 
-  @Expose private Integer sunset;
+  @Expose
+  private Integer sunset;
 
   /**
    * @return The message

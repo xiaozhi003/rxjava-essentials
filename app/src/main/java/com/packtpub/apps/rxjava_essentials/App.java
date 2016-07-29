@@ -2,6 +2,7 @@ package com.packtpub.apps.rxjava_essentials;
 
 import android.app.Application;
 import android.content.Context;
+
 import com.alterego.advancedandroidlogger.implementations.DetailedAndroidLogger;
 import com.alterego.advancedandroidlogger.interfaces.IAndroidLogger;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -15,7 +16,8 @@ public class App extends Application {
 
   public static Context instance;
 
-  @Override public void onCreate() {
+  @Override
+  public void onCreate() {
     super.onCreate();
     instance = this;
 

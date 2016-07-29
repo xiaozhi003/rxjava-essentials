@@ -111,7 +111,8 @@ public class AppInfoRich implements Comparable<Object> {
     return icon;
   }
 
-  @SuppressLint("NewApi") public long getFirstInstallTime() {
+  @SuppressLint("NewApi")
+  public long getFirstInstallTime() {
     PackageInfo pi = getPackageInfo();
     if (pi != null
         && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.GINGERBREAD) {
@@ -121,7 +122,8 @@ public class AppInfoRich implements Comparable<Object> {
     }
   }
 
-  @SuppressLint("NewApi") public long getLastUpdateTime() {
+  @SuppressLint("NewApi")
+  public long getLastUpdateTime() {
     PackageInfo pi = getPackageInfo();
     if (pi != null
         && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.GINGERBREAD) {
@@ -131,12 +133,14 @@ public class AppInfoRich implements Comparable<Object> {
     }
   }
 
-  @Override public int compareTo(Object o) {
+  @Override
+  public int compareTo(Object o) {
     AppInfoRich f = (AppInfoRich) o;
     return getName().compareTo(f.getName());
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return getName();
   }
 

@@ -4,8 +4,10 @@ import com.google.gson.annotations.Expose;
 
 public class Coord {
 
-  @Expose private Double lon;
-  @Expose private Double lat;
+  @Expose
+  private Double lon;
+  @Expose
+  private Double lat;
 
   /**
    * @return The lon

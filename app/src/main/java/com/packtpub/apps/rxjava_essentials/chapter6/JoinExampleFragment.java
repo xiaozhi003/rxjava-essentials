@@ -29,91 +29,91 @@ import rx.android.schedulers.AndroidSchedulers;
 
 public class JoinExampleFragment extends Fragment {
 
-    @Bind(R.id.fragment_first_example_list)
-    RecyclerView mRecyclerView;
+  @Bind(R.id.fragment_first_example_list)
+  RecyclerView mRecyclerView;
 
-    @Bind(R.id.fragment_first_example_swipe_container)
-    SwipeRefreshLayout mSwipeRefreshLayout;
+  @Bind(R.id.fragment_first_example_swipe_container)
+  SwipeRefreshLayout mSwipeRefreshLayout;
 
-    private ApplicationAdapter mAdapter;
+  private ApplicationAdapter mAdapter;
 
-    private ArrayList<AppInfo> mAddedApps = new ArrayList<>();
+  private ArrayList<AppInfo> mAddedApps = new ArrayList<>();
 
-    public JoinExampleFragment() {
-    }
+  public JoinExampleFragment() {
+  }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_example, container, false);
-    }
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                           Bundle savedInstanceState) {
+    return inflater.inflate(R.layout.fragment_example, container, false);
+  }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
+  @Override
+  public void onViewCreated(View view, Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    ButterKnife.bind(this, view);
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+    mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        mAdapter = new ApplicationAdapter(new ArrayList<>(), R.layout.applications_list_item);
-        mRecyclerView.setAdapter(mAdapter);
+    mAdapter = new ApplicationAdapter(new ArrayList<>(), R.layout.applications_list_item);
+    mRecyclerView.setAdapter(mAdapter);
 
-        mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.myPrimaryColor));
-        mSwipeRefreshLayout.setProgressViewOffset(false, 0,
-                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24,
-                        getResources().getDisplayMetrics()));
+    mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.myPrimaryColor));
+    mSwipeRefreshLayout.setProgressViewOffset(false, 0,
+        (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24,
+            getResources().getDisplayMetrics()));
 
-        // Progress
-        mSwipeRefreshLayout.setEnabled(false);
-        mSwipeRefreshLayout.setRefreshing(true);
-        mRecyclerView.setVisibility(View.GONE);
+    // Progress
+    mSwipeRefreshLayout.setEnabled(false);
+    mSwipeRefreshLayout.setRefreshing(true);
+    mRecyclerView.setVisibility(View.GONE);
 
-        List<AppInfo> apps = ApplicationsList.getInstance().getList();
+    List<AppInfo> apps = ApplicationsList.getInstance().getList();
 
-        loadList(apps);
-    }
+    loadList(apps);
+  }
 
-    private void loadList(List<AppInfo> apps) {
-        mRecyclerView.setVisibility(View.VISIBLE);
+  private void loadList(List<AppInfo> apps) {
+    mRecyclerView.setVisibility(View.VISIBLE);
 
-        Observable<AppInfo> appsSequence =
-                Observable.interval(1000, TimeUnit.MILLISECONDS).map(position -> {
-                    App.L.debug("Position: " + position);
-                    return apps.get(position.intValue());
-                });
-        Observable<Long> tictoc = Observable.interval(1000, TimeUnit.MILLISECONDS);
+    Observable<AppInfo> appsSequence =
+        Observable.interval(1000, TimeUnit.MILLISECONDS).map(position -> {
+          App.L.debug("Position: " + position);
+          return apps.get(position.intValue());
+        });
+    Observable<Long> tictoc = Observable.interval(1000, TimeUnit.MILLISECONDS);
 
-        appsSequence.join(tictoc, appInfo -> Observable.timer(2, TimeUnit.SECONDS),
-                time -> Observable.timer(0, TimeUnit.SECONDS), this::updateTitle)
-                .observeOn(AndroidSchedulers.mainThread())
-                .take(10)
-                .subscribe(new Observer<AppInfo>() {
-                    @Override
-                    public void onCompleted() {
-                        Toast.makeText(getActivity(), "Here is the list!", Toast.LENGTH_LONG).show();
-                    }
+    appsSequence.join(tictoc, appInfo -> Observable.timer(2, TimeUnit.SECONDS),
+        time -> Observable.timer(0, TimeUnit.SECONDS), this::updateTitle)
+        .observeOn(AndroidSchedulers.mainThread())
+        .take(10)
+        .subscribe(new Observer<AppInfo>() {
+          @Override
+          public void onCompleted() {
+            Toast.makeText(getActivity(), "Here is the list!", Toast.LENGTH_LONG).show();
+          }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        mSwipeRefreshLayout.setRefreshing(false);
-                        Toast.makeText(getActivity(), "Something went wrong!", Toast.LENGTH_SHORT).show();
-                    }
+          @Override
+          public void onError(Throwable e) {
+            mSwipeRefreshLayout.setRefreshing(false);
+            Toast.makeText(getActivity(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+          }
 
-                    @Override
-                    public void onNext(AppInfo appInfo) {
-                        if (mSwipeRefreshLayout.isRefreshing()) {
-                            mSwipeRefreshLayout.setRefreshing(false);
-                        }
-                        mAddedApps.add(appInfo);
-                        int position = mAddedApps.size() - 1;
-                        mAdapter.addApplication(position, appInfo);
-                        mRecyclerView.smoothScrollToPosition(position);
-                    }
-                });
-    }
+          @Override
+          public void onNext(AppInfo appInfo) {
+            if (mSwipeRefreshLayout.isRefreshing()) {
+              mSwipeRefreshLayout.setRefreshing(false);
+            }
+            mAddedApps.add(appInfo);
+            int position = mAddedApps.size() - 1;
+            mAdapter.addApplication(position, appInfo);
+            mRecyclerView.smoothScrollToPosition(position);
+          }
+        });
+  }
 
-    private AppInfo updateTitle(AppInfo appInfo, Long time) {
-        appInfo.setName(time + " " + appInfo.getName());
-        return appInfo;
-    }
+  private AppInfo updateTitle(AppInfo appInfo, Long time) {
+    appInfo.setName(time + " " + appInfo.getName());
+    return appInfo;
+  }
 }
